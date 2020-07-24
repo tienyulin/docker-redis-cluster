@@ -1,0 +1,162 @@
+version: '3'
+services: 
+    master1:
+        container_name: redis-master1
+        build: redis
+        environment: 
+        - REDIS_PORT=630001
+        ports: 
+        - 63001:6379
+        networks: 
+            extnetwork:
+                ipv4_address: 172.63.0.11
+    slave101:
+        container_name: redis-slave101
+        build: redis
+        command: redis-server --slaveof redis-master1 6379
+        environment: 
+        - REDIS_PORT=63002
+        ports: 
+        - 63002:6379
+        networks: 
+            extnetwork:
+                ipv4_address: 172.63.0.12
+        depends_on: 
+        - master1
+    slave102:
+        container_name: redis-slave102
+        build: redis
+        command: redis-server --slaveof redis-master1 6379
+        environment: 
+        - REDIS_PORT=63003
+        ports: 
+        - 63003:6379
+        networks: 
+            extnetwork:
+                ipv4_address: 172.63.0.13
+        depends_on: 
+        - master1
+        - slave101
+    master2:
+        container_name: redis-master2
+        build: redis
+        environment: 
+        - REDIS_PORT=63004
+        ports: 
+        - 63004:6379
+        networks: 
+            extnetwork:
+                ipv4_address: 172.63.0.14
+    slave201:
+        container_name: redis-slave201
+        build: redis
+        command: redis-server --slaveof redis-master2 6379
+        environment: 
+        - REDIS_PORT=63005
+        ports: 
+        - 63005:6379
+        networks: 
+            extnetwork:
+                ipv4_address: 172.63.0.15
+        depends_on: 
+        - master2
+    slave202:
+        container_name: redis-slave202
+        build: redis
+        command: redis-server --slaveof redis-master2 6379
+        environment: 
+        - REDIS_PORT=63006
+        ports: 
+        - 63006:6379
+        networks: 
+            extnetwork:
+                ipv4_address: 172.63.0.16
+        depends_on: 
+        - master2
+        - slave201
+    master3:
+        container_name: redis-master3
+        build: redis
+        environment: 
+        - REDIS_PORT=63007
+        ports: 
+        - 63007:6379
+        networks: 
+            extnetwork:
+                ipv4_address: 172.63.0.17
+    slave301:
+        container_name: redis-slave301
+        build: redis
+        command: redis-server --slaveof redis-master3 6379
+        environment: 
+        - REDIS_PORT=63008
+        ports: 
+        - 63008:6379
+        networks: 
+            extnetwork:
+                ipv4_address: 172.63.0.18
+        depends_on: 
+        - master3
+    slave302:
+        container_name: redis-slave302
+        build: redis
+        command: redis-server --slaveof redis-master3 6379
+        environment: 
+        - REDIS_PORT=63009
+        ports: 
+        - 63009:6379
+        networks: 
+            extnetwork:
+                ipv4_address: 172.63.0.19
+        depends_on: 
+        - master3
+        - slave301
+    cluster:
+        image: redis
+        container_name: redis-cluster-creator 
+        command: redis-cli --cluster create 172.63.0.11:6379 172.63.0.12:6379 172.63.0.13:6379 172.63.0.14:6379 172.63.0.15:6379 172.63.0.16:6379 172.63.0.17:6379 172.63.0.18:6379 172.63.0.19:6379 --cluster-replicas 1
+        networks: 
+            extnetwork:
+                ipv4_address: 172.63.0.20
+        depends_on: 
+            - master1
+            - slave101
+            - slave102
+            - master2
+            - slave201
+            - slave202
+            - master3
+            - slave301
+            - slave302
+    sentinel1:
+        container_name: redis-sentinel1
+        build: sentinel
+        environment: 
+        - REDIS_PORT=26379
+        ports: 
+        - 26379:26379
+        networks: 
+            extnetwork:
+    sentinel2:
+        container_name: redis-sentinel2
+        build: sentinel
+        environment: 
+        - REDIS_PORT=26380
+        ports: 
+        - 26380:26379
+        networks: 
+            extnetwork:
+    sentinel3:
+        container_name: redis-sentinel3
+        build: sentinel
+        environment: 
+        - REDIS_PORT=26381
+        ports: 
+        - 26381:26379
+        networks: 
+            extnetwork:
+networks: 
+    extnetwork:
+        ipam: 
+            config: 
+            - subnet: 172.63.0.0/16

@@ -1,0 +1,27 @@
+version: '3'
+services: 
+    sentinel1:
+        container_name: redis-sentinel1
+        build: .
+        environment: 
+        - REDIS_PORT=26379
+        ports: 
+        - 26379:26379
+    sentinel2:
+        container_name: redis-sentinel2
+        build: .
+        environment: 
+        - REDIS_PORT=26380
+        ports: 
+        - 26380:26379
+    sentinel3:
+        container_name: redis-sentinel3
+        build: .
+        environment: 
+        - REDIS_PORT=26381
+        ports: 
+        - 26381:26379
+networks: 
+    default:
+        external: 
+            name: master-slave_default

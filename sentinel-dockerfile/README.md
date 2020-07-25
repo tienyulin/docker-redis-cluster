@@ -1,2 +1,4 @@
 # Redis Docker Compose + Dockerfile
-使用 Dockerfile 的好處是可以自訂一些參數來使用，像是這個範例是根據每個 Container 在 docker-compose.yml 設定 REDIS_PORT 的參數，然後在 Dockerfile 裡面去改 sentinel.conf 裡的 Port 號。這樣的作法可以不用要建多少 Container 就要新增多少個 sentinel.conf，如本專案的 sentinel 資料夾內就複製了三個 sentinel.conf 再用 Volime 掛載到 Container。
+使用 Dockerfile 的好處是可以自訂一些參數來使用，像是這個範例是根據每個 Container 在 docker-compose.yml 設定 REDIS_PORT 的參數，然後在 Dockerfile 裡面去改 sentinel.conf 裡的 Port 號。  
+
+這樣的作法可以不用要建多少 Container 就要新增多少個 sentinel.conf，如本專案的 sentinel 資料夾內就複製了三個 sentinel.conf 再用 Volime 掛載到 Container。

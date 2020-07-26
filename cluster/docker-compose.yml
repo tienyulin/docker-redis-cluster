@@ -6,6 +6,8 @@ services:
             context: redis
             args:
             - REDIS_PORT=9001
+        volumes: 
+        - ./data/node1/data:/data
         network_mode: host
     node2:
         container_name: redis-node2
@@ -13,6 +15,8 @@ services:
             context: redis
             args:
             - REDIS_PORT=9002
+        volumes: 
+        - ./data/node2/data:/data
         network_mode: host
     node3:
         container_name: redis-node3
@@ -20,6 +24,8 @@ services:
             context: redis
             args:
             - REDIS_PORT=9003
+        volumes: 
+        - ./data/node3/data:/data
         network_mode: host
     node4:
         container_name: redis-node4
@@ -27,6 +33,8 @@ services:
             context: redis
             args:
             - REDIS_PORT=9004
+        volumes: 
+        - ./data/node4/data:/data
         network_mode: host
     node5:
         container_name: redis-node5
@@ -34,6 +42,8 @@ services:
             context: redis
             args:
             - REDIS_PORT=9005
+        volumes: 
+        - ./data/node5/data:/data
         network_mode: host
     node6:
         container_name: redis-node6
@@ -41,6 +51,8 @@ services:
             context: redis
             args:
             - REDIS_PORT=9006
+        volumes: 
+        - ./data/node6/data:/data
         network_mode: host
     cluster-creator:
         image: redis

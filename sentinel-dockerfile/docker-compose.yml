@@ -29,7 +29,7 @@ services:
         volumes: 
             - ./data/redis-sentinel3/data:/data
         ports: 
-        - 26381:26380
+        - 26381:26381
 networks: 
     default:
         external: 

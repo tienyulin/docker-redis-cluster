@@ -19,7 +19,7 @@ services:
         volumes: 
             - ./data/redis-sentinel2/data:/data
         ports: 
-        - 26380:26379
+        - 26380:26380
     sentinel3:
         container_name: redis-sentinel3
         build: 
@@ -29,7 +29,7 @@ services:
         volumes: 
             - ./data/redis-sentinel3/data:/data
         ports: 
-        - 26381:26379
+        - 26381:26380
 networks: 
     default:
         external: 

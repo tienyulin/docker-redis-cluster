@@ -15,7 +15,7 @@ services:
         - ./sentinel2.conf:/etc/redis/sentinel/sentinel.conf
         command: redis-sentinel /etc/redis/sentinel/sentinel.conf
         ports: 
-        - 26380:26380
+        - 26380:26379
     sentinel3:
         container_name: redis-sentinel3
         image: redis
@@ -23,7 +23,7 @@ services:
         - ./sentinel3.conf:/etc/redis/sentinel/sentinel.conf
         command: redis-sentinel /etc/redis/sentinel/sentinel.conf
         ports: 
-        - 26381:26381
+        - 26381:26379
 networks: 
     default:
         external: 

@@ -15,7 +15,7 @@ services:
         volumes: 
         - ./data/redis-sentinel2/data:/data
         ports: 
-        - 26380:26380
+        - 26380:26379
         environment: 
         - REDIS_PORT=26380 
     sentinel3:
@@ -24,7 +24,7 @@ services:
         volumes: 
         - ./data/redis-sentinel3/data:/data
         ports: 
-        - 26381:26381
+        - 26381:26379
         environment: 
         - REDIS_PORT=26381 
 networks: 

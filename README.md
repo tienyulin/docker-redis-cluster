@@ -1,4 +1,5 @@
 # Redis
+![Docker Cloud Automated build](https://img.shields.io/docker/cloud/automated/tienyu/redis-cluster)
 
 ## How To Use
 ```bash=
